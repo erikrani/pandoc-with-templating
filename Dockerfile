@@ -4,12 +4,12 @@ FROM python:3.7-alpine as base
 FROM base as builder
 RUN mkdir /install
 WORKDIR /install
-RUN apk add --no-cache git && \
-    git clone --branch 0.2.1 https://github.com/githubERIK/pandoc-mustache && \
-    cd pandoc-mustache && \
-    python setup.py sdist && \
-    cd dist && \
-    pip install pandoc-mustache-0.2.1.tar.gz pandoc-include==0.6.3 --install-option="--prefix=/install"
+RUN apk add --no-cache git &&
+    git clone --branch 1.0.0 https://github.com/githubERIK/pandoc-mustache &&
+    cd pandoc-mustache &&
+    python setup.py sdist &&
+    cd dist &&
+    pip install pandoc-mustache-1.0.0.tar.gz pandoc-include==0.6.3 --install-option="--prefix=/install"
 
 FROM base
 COPY --from=builder /install /usr/local
