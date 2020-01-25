@@ -5,11 +5,11 @@ FROM base as builder
 RUN mkdir /install
 WORKDIR /install
 RUN apk add --no-cache git && \
-    git clone https://github.com/githubERIK/pandoc-mustache && \
+    git clone --branch 0.2.1 https://github.com/githubERIK/pandoc-mustache && \
     cd pandoc-mustache && \
     python setup.py sdist && \
     cd dist && \
-    pip install pandoc-mustache-0.1.0.tar.gz pandoc-include==0.6.3 --install-option="--prefix=/install"
+    pip install pandoc-mustache-0.2.1.tar.gz pandoc-include==0.6.3 --install-option="--prefix=/install"
 
 FROM base
 COPY --from=builder /install /usr/local
