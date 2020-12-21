@@ -8,10 +8,10 @@ ENV PATH="/opt/venv/bin:$PATH"
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 RUN apk add --no-cache git && \
-    git -c advice.detachedHead=false clone --branch 2.0.0 https://github.com/githubERIK/pandoc-mustache && \
-    cd pandoc-mustache && \
-    pip install --upgrade --no-cache-dir pip wheel && \
-    pip install --no-cache-dir pandoc-include==0.8.4 .
+    pip install --no-cache-dir --upgrade pip wheel && \
+    pip install --no-cache-dir \
+        git+https://github.com/githubERIK/pandoc-mustache.git@2.0.0 \
+        pandoc-include==0.8.4
 
 FROM base
 WORKDIR /data
